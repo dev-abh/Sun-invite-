@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunday Morning Invitation 🐦</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(-45deg,#74ebd5,#ACB6E5,#89f7fe,#66a6ff);
+background-size:400% 400%;
+animation:gradientBG 12s ease infinite;
+}
+
+@keyframes gradientBG{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.card{
+width:90%;
+max-width:520px;
+background:rgba(255,255,255,0.95);
+backdrop-filter:blur(12px);
+border-radius:28px;
+padding:40px 30px;
+text-align:center;
+box-shadow:0 20px 60px rgba(0,0,0,.15);
+animation:cardEntry 1.2s ease;
+}
+
+@keyframes cardEntry{
+from{
+opacity:0;
+transform:translateY(50px) scale(.9);
+}
+to{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+}
+
+.bird{
+font-size:60px;
+animation:floatBird 3s ease-in-out infinite;
+}
+
+@keyframes floatBird{
+50%{
+transform:translateY(-10px);
+}
+}
+
+h1{
+margin-top:15px;
+font-size:32px;
+color:#222;
+}
+
+.date{
+margin-top:10px;
+font-size:18px;
+font-weight:600;
+color:#555;
+}
+
+.message{
+margin-top:20px;
+font-size:18px;
+line-height:1.7;
+color:#444;
+}
+
+.buttons{
+margin-top:35px;
+position:relative;
+height:120px;
+}
+
+button{
+border:none;
+padding:14px 30px;
+font-size:16px;
+border-radius:50px;
+cursor:pointer;
+transition:.3s;
+font-weight:600;
+}
+
+.accept{
+background:#2ecc71;
+color:white;
+box-shadow:0 10px 25px rgba(46,204,113,.3);
+}
+
+.accept:hover{
+transform:scale(1.08);
+}
+
+.decline{
+position:absolute;
+left:58%;
+top:0;
+background:#ff5c5c;
+color:white;
+box-shadow:0 10px 25px rgba(255,92,92,.3);
+}
+
+.success{
+display:none;
+margin-top:25px;
+font-size:22px;
+font-weight:700;
+color:#27ae60;
+animation:fadeIn .7s ease;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(15px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.footer{
+margin-top:20px;
+font-size:14px;
+color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="bird">🕊️</div>
+
+<h1>You're Invited!</h1>
+
+<div class="date">
+Sunday Morning 🌿
+</div>
+
+<div class="message">
+Would you like to join me for a peaceful visit to
+<strong>Okhla Bird Sanctuary</strong> this Sunday morning?
+
+<br><br>
+
+Fresh air, beautiful birds, nature walks and great company await. 😊
+</div>
+
+<div class="buttons">
+
+<button class="accept" onclick="acceptInvite()">
+Yes, I'd Love To ❤️
+</button>
+
+<button class="decline" id="declineBtn">
+Not Available 😅
+</button>
+
+</div>
+
+<div class="success" id="successMessage">
+🎉 Awesome! See you on Sunday morning!
+</div>
+
+<div class="footer">
+Made with ❤️ especially for you
+</div>
+
+</div>
+
+<script>
+const declineBtn = document.getElementById('declineBtn');
+
+function moveButton() {
+const maxX = window.innerWidth - 180;
+const maxY = window.innerHeight - 80;
+
+declineBtn.style.position = 'fixed';
+declineBtn.style.left = Math.random() * maxX + 'px';
+declineBtn.style.top = Math.random() * maxY + 'px';
+}
+
+declineBtn.addEventListener('mouseover', moveButton);
+declineBtn.addEventListener('touchstart', moveButton);
+
+function acceptInvite(){
+document.getElementById('successMessage').style.display='block';
+
+setTimeout(()=>{
+confetti();
+},300);
+}
+
+function confetti(){
+for(let i=0;i<50;i++){
+let c=document.createElement('div');
+
+c.style.position='fixed';
+c.style.left=Math.random()*100+'vw';
+c.style.top='-10px';
+c.style.width='10px';
+c.style.height='10px';
+c.style.borderRadius='50%';
+c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+c.style.zIndex='9999';
+
+document.body.appendChild(c);
+
+let duration=2000+Math.random()*2000;
+
+c.animate([
+{transform:'translateY(0)'},
+{transform:`translateY(${window.innerHeight+100}px)`}
+],{
+duration:duration,
+easing:'linear'
+});
+
+setTimeout(()=>c.remove(),duration);
+}
+}
+</script>
+
+</body>
+</html>
